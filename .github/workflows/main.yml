@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ajit-devops
+    runs-on: ubuntu-latest
     steps:
        - name: Checkout the repository on ubuntu runner
          uses: actions/checkout@v4
@@ -25,7 +25,7 @@ jobs:
            path: target/devops.war
      
   deploy:
-    runs-on: ajit-devops
+    runs-on: ubuntu-latest
     environment: prod
     needs: build
     steps:
