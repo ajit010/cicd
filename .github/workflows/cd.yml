@@ -9,11 +9,10 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
-    environment: prod
     steps:
-       - uses: actions/checkout@v4.1.1
-       
-       - name: Deployment using kubernetes
+       - name: Deployment using docker
          run: |
-           kubectl apply -f deployment.yml
-           kubectl get deployment
+           sudo docker rm -f web1
+           sudo docker rmi -f gagandeepthinknyx/intel-app:latest
+           sudo docker run -dt --name web1 -p 9000:8080 gagandeepthinknyx/intel-app:latest
+           
