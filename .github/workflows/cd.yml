@@ -1,0 +1,19 @@
+# Workflow to deploy the artifacts
+name: cd
+on:
+  workflow_run:
+    workflows: ["ci"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    environment: prod
+    steps:
+       - uses: actions/checkout@v4.1.1
+       
+       - name: Deployment using kubernetes
+         run: |
+           kubectl apply -f deployment.yml
+           kubectl get deployment
